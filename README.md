@@ -16,3 +16,9 @@ npm run dev
 
 This will start the development server and you can view the project in your browser at `http://localhost:5173`.
 
+To run the tests, you can use the following command:
+
+```npm run test
+npm run test
+```
+
