@@ -2,7 +2,7 @@ import { NoteList } from "../note-list/note-list";
 import type { ApiNote } from "../note.types";
 
 export function NotesView() {
-  const notes: ApiNote[] = [];
+  const notes: ApiNote[] = [{ id: 1, body: "Note 1 \n description" }];
 
   return (
     <div>
