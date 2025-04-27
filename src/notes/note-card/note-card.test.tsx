@@ -1,14 +1,12 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { NoteCard } from "./note-card";
-import { MemoryRouter } from "react-router";
+import { renderWithRouter } from "../../test-utils";
 
 describe("NoteCard", () => {
   test("should display title", () => {
-    render(
-      <MemoryRouter initialEntries={["/"]}>
-        <NoteCard note={{ id: 1, body: "Note 1 \n description" }} />
-      </MemoryRouter>,
+    renderWithRouter(
+      <NoteCard note={{ id: 1, body: "Note 1 \n description" }} />,
     );
 
     const noteTitle = screen.getByText("Note 1");
@@ -17,10 +15,8 @@ describe("NoteCard", () => {
   });
 
   test("should have link to view note", () => {
-    render(
-      <MemoryRouter initialEntries={["/"]}>
-        <NoteCard note={{ id: 1, body: "Note 1 \n description" }} />
-      </MemoryRouter>,
+    renderWithRouter(
+      <NoteCard note={{ id: 1, body: "Note 1 \n description" }} />,
     );
 
     const noteLink = screen.getByRole("link");
