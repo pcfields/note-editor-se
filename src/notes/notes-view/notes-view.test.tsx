@@ -14,7 +14,7 @@ describe("NotesView", () => {
   test("displays the list of notes", () => {
     render(<NotesView />);
 
-    const notesList = screen.getByTestId("note-list");
+    const notesList = screen.getByTestId("note-list-container");
 
     expect(notesList).toBeInTheDocument();
   });
