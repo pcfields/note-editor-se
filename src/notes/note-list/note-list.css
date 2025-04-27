@@ -1,0 +1,11 @@
+.note-list {
+  display: grid;
+  gap: var(--spacing-2);
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}

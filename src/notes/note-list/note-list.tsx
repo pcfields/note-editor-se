@@ -1,5 +1,6 @@
 import type { ApiNote } from "../note.types";
 import { NoteCard } from "../note-card/note-card";
+import "./note-list.css";
 
 type NoteListProps = {
   notes: ApiNote[];
@@ -18,7 +19,7 @@ export function NoteList({ notes }: NoteListProps) {
 
   return (
     <div data-testid="note-list-container">
-      <ul data-testid="note-list">
+      <ul className="note-list" data-testid="note-list">
         {notes.map((note) => (
           <li key={note.id}>
             <NoteCard note={note} />
