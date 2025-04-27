@@ -1,6 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { NoteList } from "./note-list";
+import { renderWithRouter } from "../../test-utils";
 
 describe("Notelist", () => {
   test("should display correct number of notes", () => {
@@ -9,7 +10,7 @@ describe("Notelist", () => {
       { id: 2, body: "Note 2" },
     ];
 
-    render(<NoteList notes={notes} />);
+    renderWithRouter(<NoteList notes={notes} />);
 
     const listItems = screen.queryAllByRole("listitem");
 
@@ -17,7 +18,7 @@ describe("Notelist", () => {
   });
 
   test("should display no saved notes message", () => {
-    render(<NoteList notes={[]} />);
+    renderWithRouter(<NoteList notes={[]} />);
 
     const noSavedNotesMessage = screen.getByTestId("no-saved-notes-message");
 

@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { ApiNote } from "../note.types";
 import "./note-card.css";
 
@@ -9,10 +10,13 @@ export function NoteCard({ note }: NoteCardProps) {
   const { id, body } = note;
 
   const title = body.split("\n")[0].trim();
+  const noteUrl = `/notes/${id}`;
 
   return (
     <div className="note-card" data-testid={`note-card-${id}`}>
-      <h2>{title}</h2>
+      <Link to={noteUrl} className="note-card-link">
+        <h2>{title}</h2>
+      </Link>
     </div>
   );
 }
