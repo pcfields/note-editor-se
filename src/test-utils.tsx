@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { render, type RenderOptions } from "@testing-library/react";
-import { MemoryRouter, type MemoryRouterProps } from "react-router";
+import { MemoryRouter, Route, type MemoryRouterProps } from "react-router";
+import { Routes } from "react-router";
 
 interface RenderWithRouterOptions extends RenderOptions {
   route?: string;
@@ -17,7 +18,11 @@ export function renderWithRouter(
 ) {
   return render(
     <MemoryRouter initialEntries={[route]} {...routerProps}>
-      {ui}
+      <Routes>
+        <Route path="/notes" element={ui} />
+        <Route path="/notes/:id" element={ui} />
+        <Route path="/" element={ui} />
+      </Routes>
     </MemoryRouter>,
     renderOptions,
   );
