@@ -1,0 +1,8 @@
+.note-view-container {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  border: 1px solid #ccc;
+  gap: var(--spacing-3);
+  background-color: #fff;
+  min-height: 90vh;
+}
