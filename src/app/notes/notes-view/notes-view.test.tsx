@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { NotesView } from "./notes-view";
-import { renderWithRouter } from "../../test-utils";
+import { renderWithRouter } from "../../../test-utils";
 
 describe("NotesView", () => {
   test("displays the title", () => {

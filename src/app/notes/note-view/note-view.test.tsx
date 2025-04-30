@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
-import { renderWithRouter } from "../../test-utils";
+import { renderWithRouter } from "../../../test-utils";
 import { NoteView } from "./note-view";
 
 describe("NoteView", () => {

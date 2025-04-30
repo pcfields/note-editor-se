@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { VisuallyHidden } from "../../shared/visually-hidden";
+import { VisuallyHidden } from "../../../shared/visually-hidden";
 import "./note-editor-toolbar.css";
 
 export function NoteEditorToolbar() {

@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { NoteList } from "./note-list";
-import { renderWithRouter } from "../../test-utils";
+import { renderWithRouter } from "../../../test-utils";
 
 describe("Notelist", () => {
   test("should display correct number of notes", () => {
