@@ -22,3 +22,9 @@ To run the tests, you can use the following command:
 npm run test
 ```
 
+# Features in the app
+
+- User can view list of notes
+- User can view selected note
+- User can edit and save a note
+- User can mention other users in the note
