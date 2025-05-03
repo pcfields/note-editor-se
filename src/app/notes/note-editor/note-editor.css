@@ -1,0 +1,4 @@
+.note-editor {
+  padding: var(--spacing-4);
+  height: calc(100% - 72px);
+}
