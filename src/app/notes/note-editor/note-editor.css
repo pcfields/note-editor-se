@@ -2,3 +2,10 @@
   padding: var(--spacing-4);
   height: calc(100% - 72px);
 }
+
+.note-editor-notification {
+  padding: var(--spacing-1) var(--spacing-3);
+  text-align: right;
+  color: #555;
+  height: 40px;
+}

@@ -8,6 +8,28 @@ export function NoteView() {
   const { id } = useParams<{ id?: string }>();
   const note: ApiNote = { id: 1, body: "title\n description text \n line 2" };
 
+  const apiPrefix = import.meta.env.VITE_API_PREFIX;
+  const sessionId = "aaa-111"; // "SESSION";
+  const apiNoteUrl = `${apiPrefix}/${sessionId}/notes/${id}`;
+
+  const onSave = async (note: ApiNote) => {
+    try {
+      const response = await fetch(apiNoteUrl, {
+        method: "PUT",
+        body: JSON.stringify(note),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Could not save note");
+      }
+    } catch (error) {
+      console.error("Error saving note:", error);
+    }
+  };
+
   if (!id) {
     return (
       <div className="note-view-container" data-testid="note-view-container">
@@ -19,7 +41,7 @@ export function NoteView() {
   return (
     <div className="note-view-container" data-testid="note-view-container">
       <NoteEditorToolbar />
-      <NoteEditor note={note} />
+      <NoteEditor note={note} onSave={onSave} />
     </div>
   );
 }
