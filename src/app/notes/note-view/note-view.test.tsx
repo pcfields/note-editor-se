@@ -24,7 +24,7 @@ describe("NoteView", () => {
     expect(invalidNoteMessage).toBeInTheDocument();
   });
 
-  test.todo("should call note api endpoint", () => {
-    renderWithRouter(<NoteView />, { route: "/notes/1" });
-  });
+  test.todo("should get the note from the api");
+  test.todo("displays the error message");
+  test.todo("displays the loading screen");
 });

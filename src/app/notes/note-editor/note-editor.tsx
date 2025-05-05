@@ -4,6 +4,7 @@ import "./note-editor.css";
 
 const AUTO_SAVE_MS_DELAY = 1000;
 // TODO: add reset saved message delay
+//
 type NoteStatus =
   | "note-idle"
   | "note-editing"
@@ -17,7 +18,6 @@ type NoteEditorProps = {
 };
 
 export function NoteEditor({ note, onSave }: NoteEditorProps) {
-  console.log({ note });
   const editorRef = useRef<HTMLDivElement>(null);
 
   const [noteContent, setNoteContent] = useState(note.body);

@@ -5,13 +5,13 @@ import { NoteEditorToolbar } from "../note-editor/note-editor-toolbar";
 import type { ApiNote } from "../note.types";
 import { NotesApi } from "../api/notes-api";
 import "./note-view.css";
+import { SESSION_ID } from "../../app-routes";
 
 type Status = "note-idle" | "note-loading" | "note-error" | "note-loaded";
 
 export function NoteView() {
   const { id } = useParams<{ id?: string }>();
 
-  const sessionId = "SESSION"; // TODO: move to a better place
   const [note, setNote] = useState<ApiNote | null>(null);
   const [status, setStatus] = useState<Status>("note-loading");
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +23,7 @@ export function NoteView() {
       setError(null);
 
       try {
-        const note = await NotesApi.getNote(sessionId, id);
+        const note = await NotesApi.getNote(SESSION_ID, id);
 
         setNote(note);
         setStatus("note-loaded");
@@ -39,7 +39,7 @@ export function NoteView() {
   }, [id]);
 
   const onSave = async (note: ApiNote) => {
-    NotesApi.saveNote(sessionId, note)
+    NotesApi.saveNote(SESSION_ID, note)
       .then(() => {
         setNote(note);
         setError(null);

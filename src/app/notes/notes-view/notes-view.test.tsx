@@ -4,6 +4,14 @@ import { NotesView } from "./notes-view";
 import { renderWithRouter } from "../../../test-utils";
 
 describe("NotesView", () => {
+  test("displays the loading screen", async () => {
+    renderWithRouter(<NotesView />);
+
+    const loadingText = screen.getByText("Loading...");
+
+    expect(loadingText).toBeInTheDocument();
+  });
+
   test("displays the title", async () => {
     renderWithRouter(<NotesView />);
 
@@ -19,4 +27,6 @@ describe("NotesView", () => {
 
     expect(notesList).toBeInTheDocument();
   });
+
+  test.todo("displays the error message");
 });
