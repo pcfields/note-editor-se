@@ -4,20 +4,22 @@ import { renderWithRouter } from "../../../test-utils";
 import { NoteView } from "./note-view";
 
 describe("NoteView", () => {
-  test("should display toolbar and note editor", () => {
+  test("should display toolbar and note editor", async () => {
     renderWithRouter(<NoteView />, { route: "/notes/1" });
 
-    const toolbar = screen.getByTestId("note-editor-toolbar");
+    const toolbar = await screen.findByTestId("note-editor-toolbar");
     const noteEditor = screen.getByTestId("note-editor");
 
     expect(toolbar).toBeInTheDocument();
     expect(noteEditor).toBeInTheDocument();
   });
 
-  test("should display invalid note id message", () => {
+  test("should display invalid note id message", async () => {
     renderWithRouter(<NoteView />, { route: "/notes" });
 
-    const invalidNoteMessage = screen.getByTestId("invalid-note-message");
+    const invalidNoteMessage = await screen.findByTestId(
+      "invalid-note-message",
+    );
 
     expect(invalidNoteMessage).toBeInTheDocument();
   });
