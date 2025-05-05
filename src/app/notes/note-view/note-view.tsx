@@ -11,16 +11,15 @@ type Status = "note-idle" | "note-loading" | "note-error" | "note-loaded";
 export function NoteView() {
   const { id } = useParams<{ id?: string }>();
 
-  const sessionId = "SESSION";
+  const sessionId = "SESSION"; // TODO: move to a better place
   const [note, setNote] = useState<ApiNote | null>(null);
-  const [status, setStatus] = useState<Status>("note-idle");
+  const [status, setStatus] = useState<Status>("note-loading");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) return;
 
     const fetchNote = async () => {
-      setStatus("note-loading");
       setError(null);
 
       try {

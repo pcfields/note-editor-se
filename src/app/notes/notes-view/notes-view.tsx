@@ -7,14 +7,12 @@ type Status = "notes-idle" | "notes-loading" | "notes-error" | "notes-loaded";
 
 export function NotesView() {
   const [notes, setNotes] = useState<ApiNote[]>([]);
-  const [status, setStatus] = useState<Status>("notes-idle");
+  const [status, setStatus] = useState<Status>("notes-loading");
   const [error, setError] = useState<string | null>(null);
   const sessionId = "SESSION"; // TODO: move to a better place
 
   useEffect(() => {
     const fetchNotes = async () => {
-      setStatus("notes-loading");
-
       try {
         const notesData = await NotesApi.getNotes(sessionId);
 
