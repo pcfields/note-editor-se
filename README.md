@@ -12,7 +12,7 @@ Before running the app you will need to add a `.env` file in the root of the app
 
 ```
 // .env
-VITE_API_PREFIX=https://challenge.surfe.com
+VITE_API_PREFIX=https://example.com
 
 ```
 
