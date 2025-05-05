@@ -1,33 +1,54 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { NoteEditor } from "../note-editor/note-editor";
 import { NoteEditorToolbar } from "../note-editor/note-editor-toolbar";
 import type { ApiNote } from "../note.types";
+import { NotesApi } from "../api/notes-api";
 import "./note-view.css";
+
+type Status = "note-idle" | "note-loading" | "note-error" | "note-loaded";
 
 export function NoteView() {
   const { id } = useParams<{ id?: string }>();
-  const note: ApiNote = { id: 1, body: "title\n description text \n line 2" };
 
-  const apiPrefix = import.meta.env.VITE_API_PREFIX;
-  const sessionId = "aaa-111"; // "SESSION";
-  const apiNoteUrl = `${apiPrefix}/${sessionId}/notes/${id}`;
+  const sessionId = "SESSION";
+  const [note, setNote] = useState<ApiNote | null>(null);
+  const [status, setStatus] = useState<Status>("note-idle");
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchNote = async () => {
+      setStatus("note-loading");
+      setError(null);
+
+      try {
+        const note = await NotesApi.getNote(sessionId, id);
+
+        setNote(note);
+        setStatus("note-loaded");
+      } catch (error) {
+        console.error("Error fetching note:", error);
+
+        setError("Could not fetch note");
+        setStatus("note-error");
+      }
+    };
+
+    fetchNote();
+  }, [id]);
 
   const onSave = async (note: ApiNote) => {
-    try {
-      const response = await fetch(apiNoteUrl, {
-        method: "PUT",
-        body: JSON.stringify(note),
-        headers: {
-          "Content-Type": "application/json",
-        },
+    NotesApi.saveNote(sessionId, note)
+      .then(() => {
+        setNote(note);
+        setError(null);
+      })
+      .catch((error) => {
+        console.error("Error saving note:", error);
+        setError("Could not save note");
       });
-
-      if (!response.ok) {
-        throw new Error("Could not save note");
-      }
-    } catch (error) {
-      console.error("Error saving note:", error);
-    }
   };
 
   if (!id) {
@@ -38,10 +59,26 @@ export function NoteView() {
     );
   }
 
+  if (status === "note-loading") {
+    return (
+      <div className="note-view-container" data-testid="note-view-container">
+        <p data-testid="loading-note-message">Loading note...</p>
+      </div>
+    );
+  }
+
+  if (status === "note-error") {
+    return (
+      <div className="note-view-container" data-testid="note-view-container">
+        <p data-testid="error-message">Error: {error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="note-view-container" data-testid="note-view-container">
       <NoteEditorToolbar />
-      <NoteEditor note={note} onSave={onSave} />
+      {note && <NoteEditor note={note} onSave={onSave} />}
     </div>
   );
 }
