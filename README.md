@@ -30,6 +30,8 @@ To run the tests, you can use the following command:
 npm run test
 ```
 
+![alt text](tests-screenshot.png)
+
 # Features in the app
 
 - [x] User can view list of notes
@@ -38,6 +40,8 @@ npm run test
 - [ ] User can mention other users in the note
 
 ## Notes and Decisions made
+
+I have made small commits so you can see my thought process. In a team setting they may use feature branches but I choose to keep it simple for this task.
 
 The tests currently hardcode the api prefix. I tried to use the prefix in the tests but I encountered some challenges so I skipped this for now to save time.
 
